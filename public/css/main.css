@@ -1,0 +1,48 @@
+.navbar {
+      box-shadow: 2px 3px 7px#FB1B1C;
+      opacity: .9;
+}
+
+.navbar .nav-item .nav-link {
+      color: #fff;
+}
+
+.main-header {
+     position: relative;
+      background: url(../img/background.jpg);
+      background-size: cover;
+      min-height 700px;
+}
+
+.background-overlay {  /* Color  encina de la imagen*/
+      background: rgba(40, 55, 95,.5);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+}
+
+.form-control, .btn{
+     border-radius: 0;
+}
+
+.team {
+      background: #30336b;
+}
+
+
+#nav-footer{    /* color de fondo footer*/
+      background:#3E444A;
+
+}
+
+.col, .ml-auto{      /* color de fuente del footer*/
+      color: white;
+}
+
+#div-row-contacto{
+      margin-left: 400px;
+}
+
+
+

@@ -1,0 +1,22 @@
+{
+  "name": "moon",
+  "version": "1.0.0",
+  "description": "![](docs/screenshot.png)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "live-server src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "live-server": "^1.2.0",
+    "mysql": "^2.16.0"
+  },
+  "directories": {
+    "doc": "docs"
+  }
+}
