@@ -67,17 +67,20 @@
               <h5 class="card-title text-center">SignUp</h5>
 
               <form class="form-signup">
-                  <div class="form-label-group">
+                  <div class="row">
+                  <div class="form-label-group col-xs-6 col-md-6">
                   
                       <input type="text" id="inputName" class="form-control" placeholder="Nombre" required autofocus>
                       <label for="inputName">Nombre</label>
                     </div>
 
-                    <div class="form-label-group">
+                    <div class="form-label-group col-xs-6 col-md-6">
                   
                         <input type="text" id="inputLastName" class="form-control" placeholder="Apellido" required autofocus>
                         <label for="inputLastName">Apellido</label>
                       </div>
+
+                    </div>
 
                 <div class="form-label-group">
                   
@@ -94,6 +97,26 @@
                   <input type="checkbox" class="custom-control-input" id="customCheck1">
                   <label class="custom-control-label" for="customCheck1">Recordar contraseña</label>
                 </div>
+
+                  <!-- Tipo de licencia-->
+                <h6 class="text-center">Tipo de licencia</h6>
+                  <div class="form-check">
+                  <input type="radio" class="form-check-input" id="stater" name="tipoLicencia" value="1">
+                  <label class="form-check-label" for="materialUnchecked">Starter</label>
+                  </div>
+
+                <div class="form-check">
+                  <input type="radio" class="form-check-input" id="developer" name="tipoLicencia" value="2" checked>
+                  <label class="form-check-label" for="materialChecked">Developer</label>
+                </div>
+
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" id="super" name="tipoLicencia" value="3" checked>
+                    <label class="form-check-label" for="materialChecked">Super</label>
+                  </div>
+                  <br>
+                  <br>
+
                 <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" id="btn-signup">Sign Up</button>
                 <hr class="my-4">
                 <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
