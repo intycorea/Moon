@@ -60,7 +60,7 @@ app.use(
 app.post("/login", function(peticion, respuesta){
     var conexion = mysql.createConnection(credenciales);
 
-    conexion.query( "SELECT codigo_usuario,nombre_usuario,correo FROM tbl_usuarios WHERE correo=? and contrasena=?",
+    conexion.query( "SELECT codigo_usuario,codigo_tipo_usuario,nombre,apellido,correo FROM tbl_usuarios WHERE correo=? and contrasena=?",
         [peticion.body.correo, peticion.body.contrasena],
         function(err, data, fields){
                 if (data.length>0){
