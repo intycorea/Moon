@@ -18,5 +18,14 @@
   },
   "directories": {
     "doc": "docs"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/intycorea/Moon.git"
+  },
+  "bugs": {
+    "url": "https://github.com/intycorea/Moon/issues"
+  },
+  "homepage": "https://github.com/intycorea/Moon#readme"
 }

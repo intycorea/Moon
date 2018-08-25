@@ -3,31 +3,40 @@ var session = require("express-session");
 var bodyParser = require("body-parser");
 var mysql = require("mysql");
 var url = require("url");
-var http = require("http")
+var http = require("http");
 var app = express();
 
-var credenciales ={
-  user:"root",
-  password:"",
-  database:"bd_moon",
-  host:"localhost",
-  port:"3306"  
+var credenciales = {
+    user:"root",
+    password:"",
+    port:"3306",
+    host:"localhost",
+    database:"bd_moon"
 };
 
+
+
 app.use(express.static("public"));
+
+
+app.use(express.static("home")); //Middlewares
+app.use(session({secret:"TLERE$%#%",resave:true, saveUninitialized:true}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
 
 //Verificar si existe una variable de sesion para poner publica la carpeta public admin
 var publicStarter = express.static("public_starter");
 var publicDeveloper = express.static("public_developer");
 var publicSuper = express.static("public_super");
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-
-
-
-app.use(session({secret:"AR$#@FE$%#%",resave:true, saveUninitialized:true}));
+///Para agregar seguridad a una ruta especifica:
+function verificarAutenticacion(peticion, respuesta, next){
+	if(peticion.session.correo)
+		return next();
+	else
+		respuesta.send("ERROR, ACCESO NO AUTORIZADO");
+}
 
 
 app.use(
@@ -48,18 +57,10 @@ app.use(
 
 
 
-///Para agregar seguridad a una ruta especifica:
-function verificarAutenticacion(peticion, respuesta, next){
-	if(peticion.session.correo)
-		return next();
-	else
-		respuesta.send("ERROR, ACCESO NO AUTORIZADO");
-}
-
 app.post("/login", function(peticion, respuesta){
     var conexion = mysql.createConnection(credenciales);
 
-    conexion.query("SELECT codigo_usuario, codigo_tipo_usuario, nombre, correo FROM tbl_usuarios  WHERE correo=? and contrasena=?",
+    conexion.query( "SELECT codigo_usuario,nombre_usuario,correo FROM tbl_usuarios WHERE correo=? and contrasena=?",
         [peticion.body.correo, peticion.body.contrasena],
         function(err, data, fields){
                 if (data.length>0){
