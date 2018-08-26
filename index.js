@@ -21,7 +21,7 @@ app.use(session({secret:"TLERE$%#%",resave:true, saveUninitialized:true}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-//Verificar si existe una variable de sesion para poner publica la carpeta public admin
+
 var publicStarter = express.static("public_starter");
 var publicDeveloper = express.static("public_developer");
 var publicSuper = express.static("public_super");
@@ -43,7 +43,6 @@ app.use(
 );
 
 
-///Para agregar seguridad a una ruta especifica:
 function verificarAutenticacion(peticion, respuesta, next){
 	if(peticion.session.correo)
 		return next();
@@ -83,6 +82,6 @@ app.post("/login", function(peticion, respuesta){
  
 
 
-            //Crear y levantar el servidor web.
+
             app.listen(3000);
             console.log("Servidor iniciado");

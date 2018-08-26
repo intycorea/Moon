@@ -5,8 +5,7 @@ $("#btn-login").click(function(){
         method:"POST",
         dataType:"json",
         success:function(respuesta){
-            if (respuesta.estatus ==0 )
-                //alert("Credenciales correctas");    
+            if (respuesta.estatus ==0 )   
                 window.location.href ="home.html";
             else
                 alert("Credenciales incorrectas");
