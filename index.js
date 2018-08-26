@@ -2,8 +2,7 @@ var express = require("express");
 var session = require("express-session");
 var bodyParser = require("body-parser");
 var mysql = require("mysql");
-var url = require("url");
-var http = require("http");
+
 var app = express();
 
 var credenciales = {
@@ -11,15 +10,13 @@ var credenciales = {
     password:"",
     port:"3306",
     host:"localhost",
-    database:"bd_moon"
+    database:"db_moon"
 };
 
 
 
 app.use(express.static("public"));
 
-
-app.use(express.static("home")); //Middlewares
 app.use(session({secret:"TLERE$%#%",resave:true, saveUninitialized:true}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
@@ -28,16 +25,6 @@ app.use(bodyParser.urlencoded({extended:true}));
 var publicStarter = express.static("public_starter");
 var publicDeveloper = express.static("public_developer");
 var publicSuper = express.static("public_super");
-
-
-///Para agregar seguridad a una ruta especifica:
-function verificarAutenticacion(peticion, respuesta, next){
-	if(peticion.session.correo)
-		return next();
-	else
-		respuesta.send("ERROR, ACCESO NO AUTORIZADO");
-}
-
 
 app.use(
     function(peticion,respuesta,next){
@@ -56,11 +43,21 @@ app.use(
 );
 
 
+///Para agregar seguridad a una ruta especifica:
+function verificarAutenticacion(peticion, respuesta, next){
+	if(peticion.session.correo)
+		return next();
+	else
+		respuesta.send("ERROR, ACCESO NO AUTORIZADO");
+}
+
+
+
 
 app.post("/login", function(peticion, respuesta){
     var conexion = mysql.createConnection(credenciales);
 
-    conexion.query( "SELECT codigo_usuario,codigo_tipo_usuario,nombre,apellido,correo FROM tbl_usuarios WHERE correo=? and contrasena=?",
+    conexion.query( "SELECT codigo_usuario,codigo_tipo_usuario,nombre,apellido,correo,contrasena,fotografia FROM tbl_usuarios WHERE correo=? and contrasena=?",
         [peticion.body.correo, peticion.body.contrasena],
         function(err, data, fields){
                 if (data.length>0){
@@ -76,19 +73,14 @@ app.post("/login", function(peticion, respuesta){
     ); 
 });
 
-app.get("/obtener-sesion", function(peticion, respuesta){
-    respuesta.send("Valor de la variable de sesion almacenado: " + peticion.session.correo);
- });
  
  app.get("/logout",function(peticion, respuesta){
      peticion.session.destroy();
      respuesta.redirect("index.html");
-     //respuesta.send("Sesion eliminada");
+
  });
  
- app.get("/ruta-restringida",verificarAutenticacion,  function(peticion, respuesta){
-     respuesta.send("Bienvenido a la ruta restringida");
- });
+ 
 
 
             //Crear y levantar el servidor web.
